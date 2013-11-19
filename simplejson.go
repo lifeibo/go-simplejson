@@ -26,6 +26,10 @@ func NewJson(body []byte) (*Json, error) {
 	return j, nil
 }
 
+func NewJsonFromData(data interface{}) *Json {
+    return &Json{data}
+}
+
 // Encode returns its marshaled data as `[]byte`
 func (j *Json) Encode() ([]byte, error) {
 	return j.MarshalJSON()
@@ -39,6 +43,11 @@ func (j *Json) UnmarshalJSON(p []byte) error {
 // Implements the json.Marshaler interface.
 func (j *Json) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&j.data)
+}
+
+
+func (j *Json) Data() interface{} {
+    return j.data
 }
 
 // Set modifies `Json` map by `key` and `value`
